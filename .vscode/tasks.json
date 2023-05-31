@@ -1,0 +1,48 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "make",
+            "icon": {
+                "id": "check"
+            },
+            "options": {
+                "statusbar": {
+                    "color": "#189122"
+                }
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Upload",
+            "type": "shell",
+            "command": "openocd",
+            "dependsOn": "Build",
+            "args": [
+                "-f",
+                "interface/stlink.cfg",
+                "-f",
+                "board/stm32f103c8_blue_pill.cfg",
+                "-c",
+                "\"program build/MX_VS_Bluepill_Template.elf verify reset exit\""
+            ],
+            "icon": {
+                "id": "arrow-up"
+            },
+            "options": {
+                "statusbar": {
+                    "color": "#2158ce"
+                }
+            }
+        }
+    ]
+}
